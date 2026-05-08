@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nikhil Lakhani · Operations Leader · Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=DM+Mono:wght@300;400;500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black:   #0a0a0a;
+  --charcoal:#141414;
+  --surface: #1c1c1c;
+  --border:  #2a2a2a;
+  --gold:    #c9a84c;
+  --gold2:   #e8c96a;
+  --ivory:   #f0ead8;
+  --muted:   #6a6a6a;
+  --dim:     #3a3a3a;
+  --white:   #f5f5f0;
+  --accent:  #2d6a4a;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── NOISE OVERLAY ─── */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.6;
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-left {
+  background: var(--charcoal);
+  padding: 4rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  border-right: 1px solid var(--border);
+}
+
+.hero-left::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.4;
+}
+
+.hero-right {
+  background: var(--black);
+  padding: 4rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+/* decorative vertical rule */
+.hero-right::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 10%; bottom: 10%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--gold) 40%, var(--gold) 60%, transparent);
+  opacity: 0.15;
+}
+
+.eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px; height: 1px;
+  background: var(--gold);
+}
+
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  font-weight: 600;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+.hero-name em {
+  font-style: normal;
+  color: var(--ivory);
+  font-weight: 600;
+}
+
+.hero-role {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+}
+
+.hero-summary {
+  font-size: 1rem;
+  color: rgba(245,245,240,0.65);
+  line-height: 1.8;
+  max-width: 380px;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+.contact-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.contact-item {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  letter-spacing: 0.05em;
+}
+.contact-item span { color: var(--gold); font-size: 0.8rem; }
+
+/* ─── METRIC BLOCKS (right side) ─── */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  border: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+}
+
+.metric-cell {
+  background: var(--surface);
+  padding: 1.5rem 1.25rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+.metric-cell:hover { background: #222; }
+.metric-cell::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.metric-cell:hover::after { transform: scaleX(1); }
+
+.metric-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--gold2);
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.metric-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--dim);
+  color: var(--muted);
+  border-radius: 1px;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.tag:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ─── SECTION BASE ─── */
+section {
+  padding: 5rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 3.5rem;
+}
+
+.section-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+.section-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--ivory);
+}
+.section-line {
+  grid-column: 2;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold) 0%, var(--border) 60%, transparent);
+  margin-bottom: 0;
+  align-self: center;
+}
+
+/* ─── CAREER TIMELINE ─── */
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--gold), var(--dim) 80%, transparent);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+  padding-left: 2rem;
+  opacity: 0;
+  animation: slideIn 0.5s ease forwards;
+}
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.2s; }
+.timeline-item:nth-child(3) { animation-delay: 0.3s; }
+.timeline-item:nth-child(4) { animation-delay: 0.4s; }
+.timeline-item:nth-child(5) { animation-delay: 0.5s; }
+.timeline-item:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2.375rem;
+  top: 0.4rem;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--black);
+  border: 2px solid var(--gold);
+  transition: background 0.2s;
+}
+.timeline-item:hover .timeline-dot { background: var(--gold); }
+
+.timeline-item.highlight .timeline-dot {
+  background: var(--gold);
+  box-shadow: 0 0 12px rgba(201,168,76,0.5);
+  width: 14px; height: 14px;
+  left: -2.5rem;
+}
+
+.timeline-period {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.timeline-role {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--ivory);
+  margin-bottom: 0.15rem;
+}
+.timeline-company {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.9rem;
+}
+
+.timeline-badge {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  padding: 0.2rem 0.6rem;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold);
+  border-radius: 1px;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+
+.timeline-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.timeline-bullets li {
+  font-size: 0.85rem;
+  color: rgba(245,245,240,0.6);
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.6;
+}
+.timeline-bullets li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 0.7rem;
+  top: 0.05rem;
+}
+.timeline-bullets li strong { color: var(--ivory); font-weight: 500; }
+
+/* ─── IMPACT SHOWCASE ─── */
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.impact-card {
+  background: var(--charcoal);
+  border: 1px solid var(--border);
+  padding: 2rem 1.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.impact-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+}
+.impact-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.impact-card:hover::before { transform: scaleX(1); }
+
+.impact-icon {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.impact-stat {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--gold2);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.impact-desc {
+  font-size: 0.82rem;
+  color: rgba(245,245,240,0.55);
+  line-height: 1.6;
+}
+.impact-desc strong { color: var(--ivory); font-weight: 500; }
+
+/* ─── COMPETENCIES ─── */
+.competency-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.competency-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.comp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.comp-name {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ivory);
+  letter-spacing: 0.02em;
+}
+.comp-level {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+.comp-bar {
+  height: 2px;
+  background: var(--dim);
+  border-radius: 1px;
+  overflow: hidden;
+}
+.comp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: fillBar 1s ease 0.5s forwards;
+}
+@keyframes fillBar {
+  to { transform: scaleX(1); }
+}
+
+/* ─── EDUCATION + AWARDS ─── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.edu-item {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.edu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.edu-degree {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ivory);
+  margin-bottom: 0.2rem;
+}
+.edu-school {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.35rem;
+}
+.edu-detail {
+  font-size: 0.8rem;
+  color: rgba(245,245,240,0.45);
+}
+.edu-highlight {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.65rem;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.award-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+.award-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.award-text {
+  font-size: 0.85rem;
+  color: rgba(245,245,240,0.6);
+  line-height: 1.55;
+}
+.award-text strong { color: var(--ivory); font-weight: 500; display: block; margin-bottom: 0.15rem; }
+
+/* ─── FOOTER / CTA ─── */
+.cta-section {
+  background: var(--charcoal);
+  border-top: 1px solid var(--border);
+  padding: 5rem 3.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: 'HIRE';
+  position: absolute;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18rem;
+  font-weight: 700;
+  color: rgba(201,168,76,0.025);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  letter-spacing: -10px;
+}
+.cta-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+.cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 600;
+  color: var(--ivory);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.cta-title em { font-style: italic; color: var(--gold); }
+.cta-sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 2.25rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 1px;
+  transition: all 0.2s;
+}
+.cta-btn.primary {
+  background: var(--gold);
+  color: var(--black);
+  font-weight: 500;
+}
+.cta-btn.primary:hover { background: var(--gold2); }
+.cta-btn.secondary {
+  border: 1px solid var(--dim);
+  color: var(--muted);
+}
+.cta-btn.secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+.footer-bar {
+  background: var(--black);
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+.footer-copy span { color: var(--gold); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { border-top: 1px solid var(--border); }
+  .hero-right::before { display: none; }
+  .impact-grid { grid-template-columns: 1fr 1fr; }
+  .two-col { grid-template-columns: 1fr; gap: 3rem; }
+}
+@media (max-width: 640px) {
+  .hero-left, .hero-right { padding: 2.5rem 1.5rem; }
+  .container { padding: 0 1.5rem; }
+  section { padding: 3.5rem 0; }
+  .impact-grid, .competency-grid { grid-template-columns: 1fr; }
+  .metrics-grid { grid-template-columns: 1fr 1fr; }
+  .cta-section { padding: 3.5rem 1.5rem; }
+  .footer-bar { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<div class="hero">
+  <div class="hero-left">
+    <div>
+      <div class="eyebrow">Operations Leader · Portfolio 2026</div>
+      <h1 class="hero-name">Nikhil<br><em>Lakhani</em></h1>
+      <p class="hero-role">Customer Operations · Escalation Expert · Team Leader</p>
+      <p class="hero-summary">
+        5+ years at Amazon India — rising through six roles to lead a high-stakes executive escalation unit that intercepted CEO, VP, Legal &amp; PR complaints before they reached senior leadership. Now ready to drive measurable CSAT, AHT &amp; quality outcomes as a Team Leader.
+      </p>
+    </div>
+    <div class="contact-row">
+      <div class="contact-item"><span>✉</span> nikkylakhani117@gmail.com</div>
+      <div class="contact-item"><span>📞</span> +91 70001 44866</div>
+      <div class="contact-item"><span>📍</span> Bhopal, India · Open to Relocation</div>
+      <div class="contact-item"><span>🔗</span> linkedin.com/in/nikhillakhanii</div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="metrics-grid">
+      <div class="metric-cell">
+        <div class="metric-num">6</div>
+        <div class="metric-label">Progressive Roles<br>at Amazon India</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-num">100%</div>
+        <div class="metric-label">Executive Response<br>Accuracy · ECR</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-num">40%</div>
+        <div class="metric-label">Monthly C-Suite<br>Escalations Intercepted</div>
+      </div>
+      <div class="metric-cell">
+        <div class="metric-num">20%+</div>
+        <div class="metric-label">Repeat Contact<br>Reduction (per defect fix)</div>
+      </div>
+    </div>
+    <div class="hero-tags">
+      <span class="tag">Team Coaching</span>
+      <span class="tag">Escalation Handling</span>
+      <span class="tag">VOC Analysis</span>
+      <span class="tag">Root Cause Analysis</span>
+      <span class="tag">SLA / KPI Ownership</span>
+      <span class="tag">Quality Auditing</span>
+      <span class="tag">Process Training</span>
+      <span class="tag">C-Suite Liaison</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ CAREER TIMELINE ═══════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Career Progression</h2>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item highlight">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Jan 2024 – Mar 2025</div>
+        <div class="timeline-role">Project Guardians Lead</div>
+        <div class="timeline-company">Amazon India · Pre-Escalation Unit</div>
+        <span class="timeline-badge">★ Flagship Achievement</span>
+        <ul class="timeline-bullets">
+          <li><strong>Handpicked</strong> from ECR to lead a unit intercepting CEO/VP/Legal/PR complaints before reaching senior leadership.</li>
+          <li>Intercepted an estimated <strong>30–40% of potential C-suite escalations per month</strong>, reducing executive queue volume and brand-risk exposure.</li>
+          <li>Identified <strong>3 recurring systemic defects</strong> via VOC trend analysis; partnered with business owners to implement fixes — each reducing repeat contacts by <strong>20%+</strong>.</li>
+          <li>Set the quality benchmark for pre-escalation handling, later <strong>adopted as standard SOP</strong> for the wider ECR team.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Sep 2023 – Jan 2024</div>
+        <div class="timeline-role">Executive Customer Relations Specialist (ECR)</div>
+        <div class="timeline-company">Amazon India · CEO / VP / Legal / PR Level</div>
+        <ul class="timeline-bullets">
+          <li>Maintained <strong>100% accuracy</strong> on executive-level responses — zero complaints escalated beyond ECR during tenure.</li>
+          <li>Diagnosed cross-departmental root causes; raised process improvement tickets that <strong>permanently resolved patterns</strong> affecting thousands of customers.</li>
+          <li>Organisation's last line of reputational defence; met SLA targets for <strong>same-day response</strong> on all high-severity cases.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Oct 2022 – Present</div>
+        <div class="timeline-role">Resolution Specialist</div>
+        <div class="timeline-company">Amazon India · Complex Contact Management</div>
+        <ul class="timeline-bullets">
+          <li>Achieved <strong>~85% first-contact resolution</strong> on multi-touch complaints that frontline agents could not close.</li>
+          <li>Reduced repeat-contact rates by coaching peers on correct policy application during live floor support.</li>
+          <li>Recognised as <strong>go-to SME</strong> for ambiguous policy; contributed to knowledge-base updates used by 100+ agents.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">May 2022 – Oct 2022</div>
+        <div class="timeline-role">Process Trainer</div>
+        <div class="timeline-company">Amazon India · New Hire & Refresher Training</div>
+        <ul class="timeline-bullets">
+          <li>Delivered training to cohorts of 15–20 agents; post-training assessment scores <strong>averaged 20% above pre-training baseline</strong>.</li>
+          <li>Introduced a daily floor-observation routine that identified knowledge gaps in <strong>week one</strong>, not at month-end audits.</li>
+          <li>Built communication guides that <strong>reduced onboarding time by ~1.5 days</strong> per batch.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Mar 2022 – May 2022</div>
+        <div class="timeline-role">Subject Matter Expert (SME)</div>
+        <div class="timeline-company">Amazon India</div>
+        <ul class="timeline-bullets">
+          <li>1-on-1 coaching lifted individual CSAT scores for <strong>90% of associates</strong> in the assigned cohort within 60 days.</li>
+          <li>Audited upstream process flows; flagged <strong>5 high-frequency defect sources</strong> — all were actioned within the quarter.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Oct 2020 – Mar 2022</div>
+        <div class="timeline-role">Customer Service Associate</div>
+        <div class="timeline-company">Amazon India · Foundation Role</div>
+        <ul class="timeline-bullets">
+          <li>Consistently ranked in the <strong>top performance tier</strong> for CSAT and FCR across an 18-month tenure.</li>
+          <li>Resolved <strong>80–100 contacts per day</strong> while maintaining quality scores above team benchmark — the foundation for rapid promotion through six roles.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ IMPACT ═══════════════════════════════ -->
+<section style="background: var(--charcoal);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Measurable Impact</h2>
+    </div>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-icon">🛡️</div>
+        <div class="impact-stat">30–40%</div>
+        <div class="impact-desc"><strong>Executive escalations intercepted monthly.</strong> Led the only pre-escalation unit at Amazon India, protecting the brand from CEO/VP/Legal/PR-level exposure.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">✅</div>
+        <div class="impact-stat">100%</div>
+        <div class="impact-desc"><strong>Executive response accuracy.</strong> Zero complaints escalated beyond ECR during my entire ECR tenure. The gold standard for quality in the organisation.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">🔁</div>
+        <div class="impact-stat">20%+</div>
+        <div class="impact-desc"><strong>Repeat contact reduction</strong> per systemic defect fix. Identified 3 root-cause issues via VOC analysis; partnered with business owners to permanently resolve each.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">🎓</div>
+        <div class="impact-stat">+20%</div>
+        <div class="impact-desc"><strong>Post-training assessment scores</strong> above pre-training baseline across all cohorts I trained. Consistent, measurable uplift — not just anecdotal improvement.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">⚡</div>
+        <div class="impact-stat">85%</div>
+        <div class="impact-desc"><strong>First-contact resolution rate</strong> on complex multi-touch complaints that frontline could not close. Reduced re-contact burden on the entire team.</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">👥</div>
+        <div class="impact-stat">90%</div>
+        <div class="impact-desc"><strong>Associates coached to improved CSAT</strong> within 60 days. 1-on-1 targeted coaching sessions as SME produced measurable individual uplift at scale.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ COMPETENCIES ═══════════════════════════════ -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Core Competencies</h2>
+    </div>
+    <div class="competency-grid">
+      <div class="competency-item">
+        <div class="comp-header"><span class="comp-name">Escalation Management (C-Suite Level)</span><span class="comp-level">Expert</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:95%"></div></div>
+      </div>
+      <div class="competency-item">
+        <div class="comp-header"><span class="comp-name">VOC Trend Analysis & Root Cause Analysis</span><span class="comp-level">Expert</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:92%"></div></div>
+      </div>
+      <div class="competency-item">
+        <div class="comp-header"><span class="comp-name">Team Coaching & Performance Management</span><span class="comp-level">Advanced</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:88%"></div></div>
+      </div>
+      <div class="competency-item">
+        <div class="comp-header"><span class="comp-name">Quality Auditing & SOP Development</span><span class="comp-level">Advanced</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:88%"></div></div>
+      </div>
+      <div class="competency-item">
+        <div class="comp-header"><span class="comp-name">SLA / KPI Ownership (AHT, CSAT, FCR)</span><span class="comp-level">Advanced</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:85%"></div></div>
+      </div>
+      <div class="competency-item">
+        <div class="comp-header"><span class="comp-name">New Hire Training & Onboarding Design</span><span class="comp-level">Advanced</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:83%"></div></div>
+      </div>
+      <div class="competency-item">
+        <div class="comp-header"><span class="comp-name">Process Improvement & Defect Elimination</span><span class="comp-level">Advanced</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:85%"></div></div>
+      </div>
+      <div class="competency-item">
+        <div class="comp-header"><span class="comp-name">Microsoft Excel · PowerPoint · CRM Systems</span><span class="comp-level">Proficient</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:75%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ EDUCATION + AWARDS ═══════════════════════════════ -->
+<section style="background: var(--charcoal);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Education &amp; Recognition</h2>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="edu-item">
+          <div class="edu-degree">B.Com. Honours — Accountancy</div>
+          <div class="edu-school">Institute for Excellence in Higher Education, Bhopal · 2018–2021</div>
+          <div class="edu-detail">Aggregate: 75%</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">Higher Secondary (12th Grade)</div>
+          <div class="edu-school">Model Hr. Sec. School, Bhopal · 2017–2018</div>
+          <div class="edu-detail">92% — Statewide top percentile</div>
+          <span class="edu-highlight">★ M.P. Govt. Academic Scholarship — Laptop Awarded</span>
+        </div>
+      </div>
+      <div>
+        <div class="award-item">
+          <div class="award-icon">🏆</div>
+          <div class="award-text">
+            <strong>M.P. Government Academic Excellence Scholarship</strong>
+            Laptop awarded for securing 92% in Class 12 — top percentile statewide, reflecting consistent high performance under pressure.
+          </div>
+        </div>
+        <div class="award-item">
+          <div class="award-icon">📐</div>
+          <div class="award-text">
+            <strong>National Mathematics Olympiad Participant</strong>
+            Selected to represent school at the competitive national level — demonstrating analytical thinking and problem-solving aptitude.
+          </div>
+        </div>
+        <div class="award-item">
+          <div class="award-icon">🏐</div>
+          <div class="award-text">
+            <strong>State-Level Volleyball Championship</strong>
+            Competed at state level — demonstrated team discipline, leadership under pressure, and competitive resilience.
+          </div>
+        </div>
+        <div class="award-item">
+          <div class="award-icon">⭐</div>
+          <div class="award-text">
+            <strong>Project Guardians — Benchmark Setter</strong>
+            Pre-escalation quality standards set by my unit were formally adopted as standard operating procedure for the wider Amazon ECR team.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CTA ═══════════════════════════════ -->
+<div class="cta-section">
+  <div class="cta-eyebrow">Open to Opportunities · May 2026</div>
+  <h2 class="cta-title">Let's build something<br><em>exceptional together.</em></h2>
+  <p class="cta-sub">Targeting Team Leader &amp; Operations Lead roles in BPO, e-commerce, and customer experience. Based in Bhopal — open to relocation across India.</p>
+  <div class="cta-links">
+    <a class="cta-btn primary" href="mailto:nikkylakhani117@gmail.com">✉ Get in Touch</a>
+    <a class="cta-btn secondary" href="https://linkedin.com/in/nikhillakhanii" target="_blank">🔗 LinkedIn Profile</a>
+    <a class="cta-btn secondary" href="tel:+917000144866">📞 +91 70001 44866</a>
+  </div>
+</div>
+
+<div class="footer-bar">
+  <span class="footer-copy">© 2026 <span>Nikhil Lakhani</span> · Operations Leader · Bhopal, India</span>
+  <span class="footer-copy">linkedin.com/in/<span>nikhillakhanii</span></span>
+</div>
+
+</body>
+</html>
